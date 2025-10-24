@@ -23,9 +23,9 @@ jobs:
           cache: "pnpm"
 
       - name: Install all dependencies
-        run: pnpm --filter manager install
+        run: pnpm install
 
       - name: Run Semantic Release
-        run: pnpm --filter manager release
+        run: pnpm release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -6,9 +6,7 @@ settings:
 
 importers:
 
-  .: {}
-
-  manager:
+  .:
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
