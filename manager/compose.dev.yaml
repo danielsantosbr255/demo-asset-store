@@ -1,0 +1,74 @@
+services:
+  backend-dev:
+    build:
+      context: ./backend
+      target: dev
+    image: demo-bookstore-backend:dev
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - 8080:8080
+    networks:
+      - network
+    depends_on:
+      - redis
+      - postgres
+    develop:
+      watch:
+        - path: ./backend
+          action: sync
+          target: /app
+          ignore: node_modules
+
+        - path: ./backend/package.json
+          action: rebuild
+
+  frontend-dev:
+    build:
+      context: ./frontend
+      target: dev
+    image: demo-bookstore-frontend:dev
+    restart: always
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env
+    networks:
+      - network
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+          ignore: node_modules
+        - action: rebuild
+          path: ./frontend/package.json
+
+  postgres:
+    image: postgres:17-alpine
+    env_file:
+      - ./backend/.env
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - network
+
+  redis:
+    image: redis:8.2.1-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+    networks:
+      - network
+
+networks:
+  network: {}
+
+volumes:
+  redis:
+  postgres:

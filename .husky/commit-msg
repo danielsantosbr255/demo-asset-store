@@ -1,0 +1,1 @@
+pnpm --filter manager exec commitlint --edit ${1}

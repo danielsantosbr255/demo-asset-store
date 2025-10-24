@@ -1,0 +1,15 @@
+services:
+  backend-prod:
+    build:
+      context: ./backend
+      target: prod
+    image: demo-bookstore:prod
+    env_file:
+      - ./backend/.env
+    ports:
+      - 8080:8080
+    networks:
+      - network
+
+networks:
+  network:
