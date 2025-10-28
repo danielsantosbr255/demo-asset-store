@@ -1,0 +1,10 @@
+node_modules
+dist
+.vscode
+.env
+.prettierignore
+eslint.config.js
+*.drawio
+.dockerignore
+Dockerfile
+compose.*yaml
