@@ -1,5 +1,5 @@
 COMPOSE_FILE := compose.dev.yaml
-PROJECT_NAME := demo-bookstore
+PROJECT_NAME := demo-asset-store
 
 # --------------------------------------
 # Comandos gerais
@@ -30,7 +30,7 @@ recreate:
 
 reset:
 	docker compose -f $(COMPOSE_FILE) -p $(PROJECT_NAME) down --volumes --remove-orphans
-	docker compose -f $(COMPOSE_FILE) -p $(PROJECT_NAME) up -d --build --watch
+	docker compose -f $(COMPOSE_FILE) -p $(PROJECT_NAME) up --watch --build
 
 logs:
 	docker compose -f $(COMPOSE_FILE) -p $(PROJECT_NAME) logs -f

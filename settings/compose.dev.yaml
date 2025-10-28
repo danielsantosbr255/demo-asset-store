@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend
       target: dev
-    image: demo-bookstore-backend:dev
+    image: demo-asset-store-backend:dev
     restart: always
     env_file:
       - ./backend/.env
@@ -28,7 +28,7 @@ services:
     build:
       context: ./frontend
       target: dev
-    image: demo-bookstore-frontend:dev
+    image: demo-asset-store-frontend:dev
     restart: always
     ports:
       - "5173:5173"
