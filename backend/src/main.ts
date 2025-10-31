@@ -1,11 +1,14 @@
 import { AppModule } from "./app.module";
-import { AppFactory } from "./core/AppFactory";
+import { initDb } from "./common/database";
+import { AppFactory } from "./core/app/AppFactory";
 import { config } from "./core/config";
 
-const bootstrap = () => {
-  const app = AppFactory.create(AppModule);
+const bootstrap = async () => {
+	await initDb();
 
-  app.listen(config.port);
+	const app = AppFactory.create(AppModule);
+
+	app.listen(config.port);
 };
 
-bootstrap();
+bootstrap().catch((err) => console.error(err));
